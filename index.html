@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>도서관 미션 대모험 🧭 - 책 속에 담긴 비밀을 찾아라!</title>
+    <meta name="description" content="도서관 구석구석을 탐험하며 숨겨진 암호와 정답을 찾아내는 즐거운 도서관 미션 어드벤처 게임입니다.">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="app-container" id="app-wrapper">
+        <!-- Confetti Canvas -->
+        <canvas id="particles-canvas"></canvas>
+
+        <!-- APP HEADER -->
+        <header>
+            <h1>도서관 미션 대모험</h1>
+            <p>책들 속에 숨겨진 비밀 번호를 해독하세요!</p>
+        </header>
+
+        <!-- SCREEN 1: Welcome/Splash Screen -->
+        <div class="screen active" id="welcome-screen">
+            <div class="splash-hero">
+                <div class="splash-icon">🧭</div>
+                <div class="splash-tagline">도서관의 탐험가가 되어보세요!</div>
+                <div class="splash-desc">
+                    안내 데스크에서 시작하여, 각 층별 서가를 돌아다니며 비밀 퀴즈와 힌트를 통해 정답을 풀어보세요.<br>
+                    모든 미션을 완수하면 <strong>특별한 기념품</strong>을 받으실 수 있습니다!
+                </div>
+            </div>
+
+            <main style="width: 100%;">
+                <div class="form-group">
+                    <label for="nickname-input" class="form-label">탐험가 닉네임</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-user input-icon"></i>
+                        <input type="text" id="nickname-input" class="text-input" placeholder="수료증에 기록될 이름을 입력하세요" autocomplete="off" maxlength="15">
+                    </div>
+                </div>
+
+                <button class="btn btn-primary" id="start-btn" onclick="startAdventure()">
+                    <i class="fa-solid fa-play"></i> 모험 시작하기
+                </button>
+                
+                <div id="welcome-msg" class="feedback-msg"></div>
+            </main>
+        </div>
+
+        <!-- SCREEN 2: Active Gameplay Screen -->
+        <div class="screen" id="game-screen">
+            <!-- HUD (Heads-Up Display) -->
+            <div class="hud-container">
+                <div class="hud-item" id="timer-hud">
+                    <i class="fa-solid fa-clock"></i> 진행 시간: <span id="timer-display">00:00</span>
+                </div>
+                <div class="hud-item" id="progress-hud">
+                    <i class="fa-solid fa-circle-check"></i> 미션 달성도: <span id="progress-text">0 / 0</span>
+                </div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress-bar" aria-label="미션 진행률">
+                <div id="progress-fill" class="progress-fill"></div>
+            </div>
+
+            <!-- Floor Visual Guide -->
+            <div class="floor-map-indicator" id="floor-indicator" aria-label="현재 층수 표시기">
+                <!-- Javascript will inject floors dynamically -->
+            </div>
+
+            <!-- Mission Content Card -->
+            <main style="display: flex; flex-direction: column; flex-grow: 1;">
+                <div class="mission-card" id="mission-card-content">
+                    <h2 class="mission-title" id="mission-title">
+                        <i class="fa-solid fa-compass"></i> 미션 불러오는 중...
+                    </h2>
+                    <div class="mission-desc" id="mission-desc">
+                        도서관 데이터를 가져오는 중입니다. 잠시만 기다려 주세요.
+                    </div>
+                </div>
+
+                <!-- Foldable Hint System -->
+                <div class="hint-container" id="hint-box">
+                    <button class="hint-trigger" id="hint-trigger-btn" onclick="toggleHint()">
+                        <i class="fa-solid fa-lightbulb"></i> <span>힌트 확인하기</span>
+                    </button>
+                    <div class="hint-content">
+                        <p id="hint-text">책장 아래쪽을 꼼꼼히 탐색해 보세요!</p>
+                    </div>
+                </div>
+
+                <!-- Input area -->
+                <div class="form-group">
+                    <label for="answer-input" class="form-label">해독 코드 입력</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-key input-icon"></i>
+                        <input type="text" id="answer-input" class="text-input" placeholder="서가에서 발견한 정답을 적어주세요" autocomplete="off">
+                    </div>
+                </div>
+
+                <div id="game-feedback" class="feedback-msg"></div>
+
+                <button class="btn btn-primary" id="check-btn" onclick="checkAnswer()" style="margin-bottom: 12px;">
+                    <i class="fa-solid fa-circle-check"></i> 정답 확인
+                </button>
+                <button class="btn btn-secondary" id="reset-game-btn" onclick="confirmReset()">
+                    <i class="fa-solid fa-rotate-left"></i> 처음부터 다시
+                </button>
+            </main>
+        </div>
+
+        <!-- SCREEN 3: Completion Certificate Screen -->
+        <div class="screen" id="complete-screen">
+            <main style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center;">
+                <!-- Physical-like Certificate -->
+                <div class="cert-card" id="completion-certificate">
+                    <div class="cert-seal">🏆</div>
+                    <div class="cert-title">도서관 탐험 완수증</div>
+                    <div class="cert-subtitle">Certificate of Exploration</div>
+                    
+                    <div class="cert-name" id="cert-user-name">탐험가 이름</div>
+                    
+                    <p class="cert-text">
+                        위 탐험가는 책과 지식이 가득한 도서관 탐험을 통해 지혜를 넓히고, 모든 미션 구역의 수수께끼를 훌륭하게 완수하였으므로 이 증서를 수여합니다.
+                    </p>
+                    
+                    <div class="cert-meta">
+                        <div class="cert-meta-item">
+                            <span>소요 시간</span>
+                            <strong id="cert-duration">10분 24초</strong>
+                        </div>
+                        <div class="cert-meta-item">
+                            <span>완료 날짜</span>
+                            <strong id="cert-date">2026년 7월 11일</strong>
+                        </div>
+                    </div>
+                    
+                    <div class="cert-id" id="cert-id-number">인증 번호: LMA-ABCD-1234</div>
+                </div>
+
+                <p style="text-align: center; font-size: 0.9rem; line-height: 1.6; color: var(--text-muted); margin-bottom: 24px;">
+                    🎉 진심으로 축하합니다!<br>
+                    안내 데스크 사서 선생님께 이 완료증 화면을 보여주고 <strong>미션 완료 기념품</strong>을 수령하세요!
+                </p>
+
+                <button class="btn btn-primary" id="restart-adventure-btn" onclick="resetGameData()">
+                    <i class="fa-solid fa-rotate-left"></i> 새 모험 시작하기
+                </button>
+            </main>
+        </div>
+    </div>
+
+    <!-- Application Script -->
+    <script src="app.js"></script>
+
+</body>
+</html>
