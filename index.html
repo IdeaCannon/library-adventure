@@ -11,6 +11,10 @@
     
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- QR Code Decode & Generate Library (CDN) -->
+    <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
 </head>
 <body>
 
@@ -78,40 +82,82 @@
             <main style="display: flex; flex-direction: column; flex-grow: 1;">
                 <div class="mission-card" id="mission-card-content">
                     <h2 class="mission-title" id="mission-title">
-                        <i class="fa-solid fa-compass"></i> 미션 불러오는 중...
+                        <i class="fa-solid fa-map-location-dot"></i> 미션 위치 탐색
                     </h2>
                     <div class="mission-desc" id="mission-desc">
                         도서관 데이터를 가져오는 중입니다. 잠시만 기다려 주세요.
                     </div>
                 </div>
 
-                <!-- Foldable Hint System -->
-                <div class="hint-container" id="hint-box">
-                    <button class="hint-trigger" id="hint-trigger-btn" onclick="toggleHint()">
-                        <i class="fa-solid fa-lightbulb"></i> <span>힌트 확인하기</span>
+                <!-- SECTION A: QR Scan required to unlock puzzle -->
+                <div id="qr-scan-zone" class="game-zone">
+                    <div class="lock-indicator">
+                        <i class="fa-solid fa-lock lock-icon"></i>
+                        <p>해당 구역의 책장에 숨겨진 <strong>QR 코드</strong>를 찾아 스마트폰 카메라로 스캔하세요.</p>
+                    </div>
+                    
+                    <button class="btn btn-primary btn-scan" id="scan-qr-btn" onclick="openScanner()">
+                        <i class="fa-solid fa-camera"></i> QR 코드 스캔하기
                     </button>
-                    <div class="hint-content">
-                        <p id="hint-text">책장 아래쪽을 꼼꼼히 탐색해 보세요!</p>
+                    
+                    <!-- Manual scan code backup -->
+                    <div class="manual-code-container">
+                        <button class="btn-text-link" id="manual-toggle-btn" onclick="toggleManualCode()">
+                            <i class="fa-solid fa-keyboard"></i> 수동으로 코드 입력하기
+                        </button>
+                        <div id="manual-input-box" class="manual-input-box">
+                            <div class="input-wrapper">
+                                <i class="fa-solid fa-qrcode input-icon"></i>
+                                <input type="text" id="manual-qr-input" class="text-input" placeholder="QR코드 아래의 인증 번호를 입력하세요" autocomplete="off">
+                            </div>
+                            <button class="btn btn-primary" onclick="submitManualCode()" style="margin-top: 10px; padding: 10px;">코드 확인</button>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Input area -->
-                <div class="form-group">
-                    <label for="answer-input" class="form-label">해독 코드 입력</label>
-                    <div class="input-wrapper">
-                        <i class="fa-solid fa-key input-icon"></i>
-                        <input type="text" id="answer-input" class="text-input" placeholder="서가에서 발견한 정답을 적어주세요" autocomplete="off">
+                <!-- SECTION B: Puzzle solving (hidden until QR scanned) -->
+                <div id="puzzle-zone" class="game-zone" style="display: none;">
+                    <div class="puzzle-unlocked-banner">
+                        <i class="fa-solid fa-lock-open"></i> 수수께끼 잠금 해제 완료!
                     </div>
+                    
+                    <div class="puzzle-question-card">
+                        <p id="puzzle-question">여기에 수수께끼 질문이 표시됩니다.</p>
+                    </div>
+
+                    <!-- Foldable Hint System -->
+                    <div class="hint-container" id="hint-box">
+                        <button class="hint-trigger" id="hint-trigger-btn" onclick="toggleHint()">
+                            <i class="fa-solid fa-lightbulb"></i> <span>힌트 확인하기</span>
+                        </button>
+                        <div class="hint-content">
+                            <p id="hint-text">힌트 내용이 표시됩니다.</p>
+                        </div>
+                    </div>
+
+                    <!-- Input area -->
+                    <div class="form-group">
+                        <label for="answer-input" class="form-label">해독 정답 입력</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-key input-icon"></i>
+                            <input type="text" id="answer-input" class="text-input" placeholder="수수께끼의 정답을 입력하세요" autocomplete="off">
+                        </div>
+                    </div>
+
+                    <div id="game-feedback" class="feedback-msg"></div>
+
+                    <button class="btn btn-primary" id="check-btn" onclick="checkAnswer()" style="margin-bottom: 12px;">
+                        <i class="fa-solid fa-circle-check"></i> 정답 확인
+                    </button>
                 </div>
 
-                <div id="game-feedback" class="feedback-msg"></div>
+                <div id="scan-feedback" class="feedback-msg"></div>
 
-                <button class="btn btn-primary" id="check-btn" onclick="checkAnswer()" style="margin-bottom: 12px;">
-                    <i class="fa-solid fa-circle-check"></i> 정답 확인
-                </button>
-                <button class="btn btn-secondary" id="reset-game-btn" onclick="confirmReset()">
-                    <i class="fa-solid fa-rotate-left"></i> 처음부터 다시
-                </button>
+                <div style="margin-top: auto; padding-top: 16px;">
+                    <button class="btn btn-secondary" id="reset-game-btn" onclick="confirmReset()">
+                        <i class="fa-solid fa-rotate-left"></i> 처음부터 다시
+                    </button>
+                </div>
             </main>
         </div>
 
@@ -121,23 +167,23 @@
                 <!-- Physical-like Certificate -->
                 <div class="cert-card" id="completion-certificate">
                     <div class="cert-seal">🏆</div>
-                    <div class="cert-title">도서관 탐험 완수증</div>
-                    <div class="cert-subtitle">Certificate of Exploration</div>
+                    <div class="cert-title">도서관 탈출 완수증</div>
+                    <div class="cert-subtitle">Certificate of Escape</div>
                     
                     <div class="cert-name" id="cert-user-name">탐험가 이름</div>
                     
                     <p class="cert-text">
-                        위 탐험가는 책과 지식이 가득한 도서관 탐험을 통해 지혜를 넓히고, 모든 미션 구역의 수수께끼를 훌륭하게 완수하였으므로 이 증서를 수여합니다.
+                        위 탐험가는 지혜와 끈기로 가득 찬 도서관 방탈출 미션을 훌륭하게 완수하고, 모든 구역의 수수께끼와 비밀을 풀어 무사히 탈출하였으므로 이 증서를 수여합니다.
                     </p>
                     
                     <div class="cert-meta">
                         <div class="cert-meta-item">
-                            <span>소요 시간</span>
+                            <span>탈출 시간</span>
                             <strong id="cert-duration">10분 24초</strong>
                         </div>
                         <div class="cert-meta-item">
                             <span>완료 날짜</span>
-                            <strong id="cert-date">2026년 7월 11일</strong>
+                            <strong id="cert-date">2026년 7월 14일</strong>
                         </div>
                     </div>
                     
@@ -145,7 +191,7 @@
                 </div>
 
                 <p style="text-align: center; font-size: 0.9rem; line-height: 1.6; color: var(--text-muted); margin-bottom: 24px;">
-                    🎉 진심으로 축하합니다!<br>
+                    🎉 진심으로 탈출을 축하합니다!<br>
                     안내 데스크 사서 선생님께 이 완료증 화면을 보여주고 <strong>미션 완료 기념품</strong>을 수령하세요!
                 </p>
 
@@ -153,6 +199,58 @@
                     <i class="fa-solid fa-rotate-left"></i> 새 모험 시작하기
                 </button>
             </main>
+        </div>
+    </div>
+
+    <!-- QR Scanner Modal Overlay -->
+    <div id="scanner-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>QR 코드 스캐너</h3>
+                <span class="close-btn" onclick="closeScanner()">&times;</span>
+            </div>
+            <p class="scanner-tip">책장이나 안내판에 부착된 QR 코드를 아래 사각형 안에 맞춰 비춰주세요.</p>
+            <div class="scanner-viewfinder">
+                <video id="scanner-video" autoplay playsinline></video>
+                <div class="viewfinder-laser"></div>
+                <div class="viewfinder-corners"></div>
+            </div>
+            <div id="scanner-msg" class="scanner-msg">카메라 작동 준비 중...</div>
+            <button class="btn btn-secondary" onclick="closeScanner()" style="margin-top: 15px;">스캔 취소</button>
+        </div>
+    </div>
+
+    <!-- TEST QR CODE GENERATOR PANEL -->
+    <div class="test-panel" id="test-panel">
+        <button class="test-panel-toggle" id="test-panel-toggle" onclick="toggleTestPanel()">
+            <i class="fa-solid fa-flask"></i> ⚙️ 디버그 및 테스트용 QR 코드 패널 열기
+        </button>
+        <div class="test-panel-content" id="test-panel-content">
+            <p class="test-desc">
+                도서관 각 구역에 부착할 QR 코드들입니다. 실제 스마트폰 기본 카메라로 스캔하여 다이렉트 링크로 게임을 진행하거나, 인앱 QR 스캐너를 켜고 이 화면의 QR 코드를 비추어 테스트해보세요.
+            </p>
+            <div class="qr-grids">
+                <div class="qr-item">
+                    <h5>1단계 QR (1F 역사)</h5>
+                    <canvas id="qr-canvas-1"></canvas>
+                    <span class="qr-value">ROOM_HIST_101</span>
+                </div>
+                <div class="qr-item">
+                    <h5>2단계 QR (2F IT)</h5>
+                    <canvas id="qr-canvas-2"></canvas>
+                    <span class="qr-value">ROOM_TECH_202</span>
+                </div>
+                <div class="qr-item">
+                    <h5>3단계 QR (3F 시)</h5>
+                    <canvas id="qr-canvas-3"></canvas>
+                    <span class="qr-value">ROOM_LIT_303</span>
+                </div>
+                <div class="qr-item">
+                    <h5>4단계 QR (탈출구)</h5>
+                    <canvas id="qr-canvas-4"></canvas>
+                    <span class="qr-value">ROOM_EXIT_999</span>
+                </div>
+            </div>
         </div>
     </div>
 
