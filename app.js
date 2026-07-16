@@ -7,8 +7,8 @@
 const MISSIONS = [
     {
         id: 1,
-        floor: "1F",
-        title: "1단계: 역사와 시작의 서가 🧭",
+        floor: "1단계",
+        title: "역사와 시작의 서가 🧭",
         desc: "1층 자료실의 <strong>'한국사 서가'</strong> 코너로 가보세요. 그곳에 숨겨진 <strong>역사 QR 코드</strong>를 찾아 스마트폰 카메라로 스캔하세요.",
         qrCode: "ROOM_HIST_101",
         question: "<strong>[역사 수수께끼]</strong><br>1443년 백성을 사랑하는 마음으로 훈민정음(한글)을 창제하여 도서관의 책들이 한글로 적힐 수 있게 해 주신 조선의 위대한 임금님은 누구일까요?",
@@ -17,8 +17,8 @@ const MISSIONS = [
     },
     {
         id: 2,
-        floor: "2F",
-        title: "2단계: 디지털 매트릭스 💻",
+        floor: "2단계",
+        title: "디지털 매트릭스 💻",
         desc: "2층 <strong>'디지털 정보 검색 코너'</strong> 또는 프린터 zone 근처를 탐색해 보세요. 그곳에 숨겨진 <strong>IT QR 코드</strong>를 찾아 스캔하세요.",
         qrCode: "ROOM_TECH_202",
         question: "<strong>[디지털 암호 해독]</strong><br>도서관의 책을 컴퓨터로 찾을 때 사용하는 단어입니다. 알파벳을 숫자 순서(A=1, B=2, C=3...)로 변환하여 다음 암호를 해독하세요.<br><br><span style='letter-spacing: 2px; font-size: 1.25rem; font-weight: 800; color: var(--secondary)'>12 - 9 - 2 - 18 - 1 - 18 - 25</span>",
@@ -27,8 +27,8 @@ const MISSIONS = [
     },
     {
         id: 3,
-        floor: "3F",
-        title: "3단계: 시인이 노래하는 바람 ✍️",
+        floor: "3단계",
+        title: "시인이 노래하는 바람 ✍️",
         desc: "3층 문학 서가의 <strong>'한국 시 서집'</strong> 구역을 찾으세요. 윤동주 시인의 시집 근처에 숨겨진 <strong>시인 QR 코드</strong>를 스캔하세요.",
         qrCode: "ROOM_LIT_303",
         question: "<strong>[시 구절 채우기]</strong><br>윤동주 시인의 대표작 '서시(序詩)'의 한 구절입니다. 빈칸에 들어갈 단어는 무엇일까요?<br><br><em>\"죽는 날까지 하늘을 우러러 한 점 부끄럼이 없기를,<br>잎새에 이는 [ <strong>?</strong> ]에도 나는 괴로워했다.\"</em>",
@@ -37,8 +37,8 @@ const MISSIONS = [
     },
     {
         id: 4,
-        floor: "Exit",
-        title: "마지막 단계: 지혜의 탈출구 🚪",
+        floor: "마지막 단계",
+        title: "지혜의 탈출구 🚪",
         desc: "마지막 관문입니다! 도서관 <strong>'정문 출구(안내 데스크)'</strong> 근처로 이동하세요. 탈출문 근처에 부착된 <strong>탈출구 QR 코드</strong>를 스캔해 봉인을 푸세요.",
         qrCode: "ROOM_EXIT_999",
         question: "<strong>[마지막 수수께끼]</strong><br>'나는 입이 없어도 세상의 모든 지식을 말하고, 발이 없어도 역사와 미래를 여행하게 해주며, 마음의 양식을 쌓아준다. 내 표지를 펼치면 모험이 시작된다.' 이것은 무엇일까요?",
