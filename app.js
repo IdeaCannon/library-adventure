@@ -238,12 +238,7 @@ function initApp() {
     const savedNickname = localStorage.getItem("library_adventure_nickname");
     const savedStartTime = localStorage.getItem("library_adventure_starttime");
     const savedSecs = localStorage.getItem("library_adventure_secs");
-    const savedUnlocked = localStorage.getItem("library_escape_unlocked");
-
-    state.isUnlocked = savedUnlocked === "true";
-    
-    // Initialize Debug/Test panel QR codes
-    generateTestQRs();
+    state.isUnlocked = localStorage.getItem("library_escape_unlocked") === "true";
 
     if (savedNickname && savedProgress !== null) {
         state.nickname = savedNickname;
@@ -725,31 +720,6 @@ function submitManualCode() {
     }
 
     applyScannedCode(code);
-}
-
-// --- Debugging / Testing Panel ---
-function toggleTestPanel() {
-    const panel = document.getElementById("test-panel");
-    panel.classList.toggle("open");
-}
-
-function generateTestQRs() {
-    MISSIONS.forEach((m, idx) => {
-        const canvas = document.getElementById(`qr-canvas-${idx + 1}`);
-        if (canvas) {
-            const baseUrl = window.location.origin + window.location.pathname;
-            const targetUrl = `${baseUrl}?code=${m.qrCode}`;
-            
-            new QRious({
-                element: canvas,
-                value: targetUrl,
-                size: 150,
-                background: '#ffffff',
-                foreground: '#0f172a',
-                level: 'H'
-            });
-        }
-    });
 }
 
 // --- Auxiliary UX Helpers ---

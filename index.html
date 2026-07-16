@@ -12,9 +12,8 @@
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- QR Code Decode & Generate Library (CDN) -->
+    <!-- QR Code Decode Library (CDN) -->
     <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
 </head>
 <body>
 
@@ -217,40 +216,6 @@
             </div>
             <div id="scanner-msg" class="scanner-msg">카메라 작동 준비 중...</div>
             <button class="btn btn-secondary" onclick="closeScanner()" style="margin-top: 15px;">스캔 취소</button>
-        </div>
-    </div>
-
-    <!-- TEST QR CODE GENERATOR PANEL -->
-    <div class="test-panel" id="test-panel">
-        <button class="test-panel-toggle" id="test-panel-toggle" onclick="toggleTestPanel()">
-            <i class="fa-solid fa-flask"></i> ⚙️ 디버그 및 테스트용 QR 코드 패널 열기
-        </button>
-        <div class="test-panel-content" id="test-panel-content">
-            <p class="test-desc">
-                도서관 각 구역에 부착할 QR 코드들입니다. 실제 스마트폰 기본 카메라로 스캔하여 다이렉트 링크로 게임을 진행하거나, 인앱 QR 스캐너를 켜고 이 화면의 QR 코드를 비추어 테스트해보세요.
-            </p>
-            <div class="qr-grids">
-                <div class="qr-item">
-                    <h5>1단계 QR (1F 역사)</h5>
-                    <canvas id="qr-canvas-1"></canvas>
-                    <span class="qr-value">ROOM_HIST_101</span>
-                </div>
-                <div class="qr-item">
-                    <h5>2단계 QR (2F IT)</h5>
-                    <canvas id="qr-canvas-2"></canvas>
-                    <span class="qr-value">ROOM_TECH_202</span>
-                </div>
-                <div class="qr-item">
-                    <h5>3단계 QR (3F 시)</h5>
-                    <canvas id="qr-canvas-3"></canvas>
-                    <span class="qr-value">ROOM_LIT_303</span>
-                </div>
-                <div class="qr-item">
-                    <h5>4단계 QR (탈출구)</h5>
-                    <canvas id="qr-canvas-4"></canvas>
-                    <span class="qr-value">ROOM_EXIT_999</span>
-                </div>
-            </div>
         </div>
     </div>
 
