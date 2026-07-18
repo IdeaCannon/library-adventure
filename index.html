@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>도서관 미션 대모험 🧭 - 책 속에 담긴 비밀을 찾아라!</title>
+    <title>덕천도서관 미션 대모험 🧭 - 도서관 비밀을 찾아라!</title>
     <meta name="description" content="도서관 구석구석을 탐험하며 숨겨진 암호와 정답을 찾아내는 즐거운 도서관 미션 어드벤처 게임입니다.">
-    
+
     <!-- Stylesheet -->
     <link rel="stylesheet" href="style.css">
-    
+
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- QR Code Decode Library (CDN) -->
     <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
 </head>
+
 <body>
 
     <div class="app-container" id="app-wrapper">
@@ -24,7 +26,7 @@
         <!-- APP HEADER -->
         <header>
             <h1>도서관 미션 대모험</h1>
-            <p>책들 속에 숨겨진 비밀 번호를 해독하세요!</p>
+            <p>도서관 곳곳에 숨겨진 비밀을 해독하세요!</p>
         </header>
 
         <!-- SCREEN 1: Welcome/Splash Screen -->
@@ -33,24 +35,25 @@
                 <div class="splash-icon">🧭</div>
                 <div class="splash-tagline">도서관의 탐험가가 되어보세요!</div>
                 <div class="splash-desc">
-                    안내 데스크에서 시작하여, 각 층별 서가를 돌아다니며 비밀 퀴즈와 힌트를 통해 정답을 풀어보세요.<br>
-                    모든 미션을 완수하면 <strong>특별한 기념품</strong>을 받으실 수 있습니다!
+                    출발 지점에서 시작하여, 각 단계별 미션 장소를 찾아 QR코드를 통해 문제를 해금하고 정답을 풀어보세요.<br>
+                    모든 미션을 완수하면 <strong>소정의 기념품</strong>을 받으실 수 있습니다!
                 </div>
             </div>
 
             <main style="width: 100%;">
                 <div class="form-group">
-                    <label for="nickname-input" class="form-label">탐험가 닉네임</label>
+                    <label for="nickname-input" class="form-label">탐험가 이름</label>
                     <div class="input-wrapper">
                         <i class="fa-solid fa-user input-icon"></i>
-                        <input type="text" id="nickname-input" class="text-input" placeholder="수료증에 기록될 이름을 입력하세요" autocomplete="off" maxlength="15">
+                        <input type="text" id="nickname-input" class="text-input" placeholder="수료증에 기록될 이름을 입력하세요"
+                            autocomplete="off" maxlength="15">
                     </div>
                 </div>
 
                 <button class="btn btn-primary" id="start-btn" onclick="startAdventure()">
                     <i class="fa-solid fa-play"></i> 모험 시작하기
                 </button>
-                
+
                 <div id="welcome-msg" class="feedback-msg"></div>
             </main>
         </div>
@@ -92,13 +95,13 @@
                 <div id="qr-scan-zone" class="game-zone">
                     <div class="lock-indicator">
                         <i class="fa-solid fa-lock lock-icon"></i>
-                        <p>해당 구역의 책장에 숨겨진 <strong>QR 코드</strong>를 찾아 스마트폰 카메라로 스캔하세요.</p>
+                        <p>해당 구역에 숨겨진 <strong>QR 코드</strong>를 찾아 스마트폰 카메라로 스캔하세요.</p>
                     </div>
-                    
+
                     <button class="btn btn-primary btn-scan" id="scan-qr-btn" onclick="openScanner()">
                         <i class="fa-solid fa-camera"></i> QR 코드 스캔하기
                     </button>
-                    
+
                     <!-- Manual scan code backup -->
                     <div class="manual-code-container">
                         <button class="btn-text-link" id="manual-toggle-btn" onclick="toggleManualCode()">
@@ -107,9 +110,11 @@
                         <div id="manual-input-box" class="manual-input-box">
                             <div class="input-wrapper">
                                 <i class="fa-solid fa-qrcode input-icon"></i>
-                                <input type="text" id="manual-qr-input" class="text-input" placeholder="QR코드 아래의 인증 번호를 입력하세요" autocomplete="off">
+                                <input type="text" id="manual-qr-input" class="text-input"
+                                    placeholder="QR코드 아래의 인증 번호를 입력하세요" autocomplete="off">
                             </div>
-                            <button class="btn btn-primary" onclick="submitManualCode()" style="margin-top: 10px; padding: 10px;">코드 확인</button>
+                            <button class="btn btn-primary" onclick="submitManualCode()"
+                                style="margin-top: 10px; padding: 10px;">코드 확인</button>
                         </div>
                     </div>
                 </div>
@@ -119,7 +124,7 @@
                     <div class="puzzle-unlocked-banner">
                         <i class="fa-solid fa-lock-open"></i> 수수께끼 잠금 해제 완료!
                     </div>
-                    
+
                     <div class="puzzle-question-card">
                         <p id="puzzle-question">여기에 수수께끼 질문이 표시됩니다.</p>
                     </div>
@@ -139,7 +144,8 @@
                         <label for="answer-input" class="form-label">해독 정답 입력</label>
                         <div class="input-wrapper">
                             <i class="fa-solid fa-key input-icon"></i>
-                            <input type="text" id="answer-input" class="text-input" placeholder="수수께끼의 정답을 입력하세요" autocomplete="off">
+                            <input type="text" id="answer-input" class="text-input" placeholder="수수께끼의 정답을 입력하세요"
+                                autocomplete="off">
                         </div>
                     </div>
 
@@ -166,15 +172,15 @@
                 <!-- Physical-like Certificate -->
                 <div class="cert-card" id="completion-certificate">
                     <div class="cert-seal">🏆</div>
-                    <div class="cert-title">도서관 탈출 완수증</div>
+                    <div class="cert-title">도서관 탐험 완수증</div>
                     <div class="cert-subtitle">Certificate of Escape</div>
-                    
+
                     <div class="cert-name" id="cert-user-name">탐험가 이름</div>
-                    
+
                     <p class="cert-text">
                         위 탐험가는 지혜와 끈기로 가득 찬 도서관 방탈출 미션을 훌륭하게 완수하고, 모든 구역의 수수께끼와 비밀을 풀어 무사히 탈출하였으므로 이 증서를 수여합니다.
                     </p>
-                    
+
                     <div class="cert-meta">
                         <div class="cert-meta-item">
                             <span>탈출 시간</span>
@@ -185,13 +191,14 @@
                             <strong id="cert-date">2026년 7월 14일</strong>
                         </div>
                     </div>
-                    
+
                     <div class="cert-id" id="cert-id-number">인증 번호: LMA-ABCD-1234</div>
                 </div>
 
-                <p style="text-align: center; font-size: 0.9rem; line-height: 1.6; color: var(--text-muted); margin-bottom: 24px;">
-                    🎉 진심으로 탈출을 축하합니다!<br>
-                    안내 데스크 사서 선생님께 이 완료증 화면을 보여주고 <strong>미션 완료 기념품</strong>을 수령하세요!
+                <p
+                    style="text-align: center; font-size: 0.9rem; line-height: 1.6; color: var(--text-muted); margin-bottom: 24px;">
+                    🎉 진심으로 덕천도서관 탐험 완료를 축하합니다!<br>
+                    출발 지점으로 가서 직원에게 완료증 화면을 보여주고 <strong>미션 완료 기념품</strong>을 수령하세요!
                 </p>
 
                 <button class="btn btn-primary" id="restart-adventure-btn" onclick="resetGameData()">
@@ -223,4 +230,5 @@
     <script src="app.js"></script>
 
 </body>
+
 </html>

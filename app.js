@@ -20,7 +20,7 @@ const MISSIONS = [
         floor: "2단계",
         title: "역사 문제 📜",
         desc: "1층 어린이자료실의 <strong>'역사(900번대)'</strong> 코너로 가보세요. 그곳에 있는 <strong>QR 코드</strong>를 찾아 스마트폰 카메라로 스캔하세요.",
-        qrCode: "ROOM_HIST_101",
+        qrCode: "ROOM_HIST_202",
         question: "<strong>[역사 수수께끼]</strong><br>1443년 백성을 사랑하는 마음으로 훈민정음(한글)을 창제하여 도서관의 책들이 한글로 적힐 수 있게 해 주신 조선의 위대한 임금님은 누구일까요?",
         hint: "초성 힌트: ㅅㅈㄷㅇ",
         answer: "세종대왕"
@@ -51,8 +51,8 @@ const MISSIONS = [
         title: "국어 문제 ✍️",
         desc: "1층 로비의 <strong>'전시코너'</strong> 구역으로 이동하세요. 그곳에 숨겨진 <strong>QR 코드</strong>를 찾아 스캔하세요.",
         qrCode: "ROOM_LANG_505",
-        question: "<strong>[국어 수수께끼]</strong><br>음식을 차려 내거나 걸터앉거나 책을 올려놓고 볼 수 있게 만든 가구를 통틀어 이르는 말은 무엇일까요?",
-        hint: "힌트: 전시 중인 작품의 제목을 유심히 보세요",
+        question: "<strong>[국어 수수께끼]</strong><br>도서관에서 바닥에 편하게 앉아 책을 올려놓고 읽을 때도 쓰고, 집에서 맛있는 밥이나 간식을 차려 먹을 때도 쓰는 다리가 달린 가구는 무엇일까요",
+        hint: "힌트: 전시 중인 작품의 제목을 유심히 보세요(1글자)",
         answer: "상"
     },
     {
