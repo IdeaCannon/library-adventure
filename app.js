@@ -8,61 +8,61 @@ const MISSIONS = [
     {
         id: 1,
         floor: "1단계",
-        title: "역사와 시작의 서가 🧭",
-        desc: "1층 자료실의 <strong>'한국사 서가'</strong> 코너로 가보세요. 그곳에 숨겨진 <strong>역사 QR 코드</strong>를 찾아 스마트폰 카메라로 스캔하세요.",
-        qrCode: "ROOM_HIST_101",
-        question: "<strong>[역사 수수께끼]</strong><br>1443년 백성을 사랑하는 마음으로 훈민정음(한글)을 창제하여 도서관의 책들이 한글로 적힐 수 있게 해 주신 조선의 위대한 임금님은 누구일까요?",
-        hint: "초성 힌트: ㅅㅈㄷㅇ (세 글자는 왕)",
-        answer: "세종대왕"
+        title: "문학 문제 🦊",
+        desc: "덕천도서관 야외에 있는 <strong>'어린왕자'</strong> 포토존으로 가보세요. 그곳에 있는 <strong>QR 코드</strong>를 찾아 스마트폰 카메라로 스캔하세요.",
+        qrCode: "ROOM_LIT_101",
+        question: "<strong>[문학 수수께끼]</strong><br>어린왕자가 친구가 된 동물은 누구일까요?",
+        hint: "힌트: 포토존에서 왼쪽에 있는 동물이에요",
+        answer: "여우"
     },
     {
         id: 2,
         floor: "2단계",
-        title: "디지털 매트릭스 💻",
-        desc: "2층 <strong>'디지털 정보 검색 코너'</strong> 또는 프린터 zone 근처를 탐색해 보세요. 그곳에 숨겨진 <strong>IT QR 코드</strong>를 찾아 스캔하세요.",
-        qrCode: "ROOM_TECH_202",
-        question: "<strong>[디지털 암호 해독]</strong><br>도서관의 책을 컴퓨터로 찾을 때 사용하는 단어입니다. 알파벳을 숫자 순서(A=1, B=2, C=3...)로 변환하여 다음 암호를 해독하세요.<br><br><span style='letter-spacing: 2px; font-size: 1.25rem; font-weight: 800; color: var(--secondary)'>12 - 9 - 2 - 18 - 1 - 18 - 25</span>",
-        hint: "도서관을 뜻하는 영어 대문자 7글자입니다.",
-        answer: "LIBRARY"
+        title: "역사 문제 📜",
+        desc: "1층 어린이자료실의 <strong>'역사(900번대)'</strong> 코너로 가보세요. 그곳에 있는 <strong>QR 코드</strong>를 찾아 스마트폰 카메라로 스캔하세요.",
+        qrCode: "ROOM_HIST_101",
+        question: "<strong>[역사 수수께끼]</strong><br>1443년 백성을 사랑하는 마음으로 훈민정음(한글)을 창제하여 도서관의 책들이 한글로 적힐 수 있게 해 주신 조선의 위대한 임금님은 누구일까요?",
+        hint: "초성 힌트: ㅅㅈㄷㅇ",
+        answer: "세종대왕"
     },
     {
         id: 3,
         floor: "3단계",
-        title: "시인이 노래하는 바람 ✍️",
-        desc: "3층 문학 서가의 <strong>'한국 시 서집'</strong> 구역을 찾으세요. 윤동주 시인의 시집 근처에 숨겨진 <strong>시인 QR 코드</strong>를 스캔하세요.",
-        qrCode: "ROOM_LIT_303",
-        question: "<strong>[시 구절 채우기]</strong><br>윤동주 시인의 대표작 '서시(序詩)'의 한 구절입니다. 빈칸에 들어갈 단어는 무엇일까요?<br><br><em>\"죽는 날까지 하늘을 우러러 한 점 부끄럼이 없기를,<br>잎새에 이는 [ <strong>?</strong> ]에도 나는 괴로워했다.\"</em>",
-        hint: "자연의 공기 흐름입니다. 초성: ㅂㄹ",
-        answer: "바람"
+        title: "암호 문제 🔐",
+        desc: "1층 어린이자료실층의 <strong>'자료검색대'</strong> 코너로 가보세요. 그곳에 숨겨진 <strong>QR 코드</strong>를 스캔하세요.",
+        qrCode: "ROOM_SEARCH_303",
+        question: "<strong>[암호 해독]</strong><br>도서관의 책을 컴퓨터로 찾을 때 사용하는 단어입니다. 알파벳을 숫자 순서(A=1, B=2, C=3...)로 변환하여 다음 암호를 해독하세요.<br><br><strong>12 - 9 - 2 - 18 - 1 - 18 - 25</strong>",
+        hint: "힌트: 영어 단어 '도서관'을 뜻합니다. 알파벳을 하나씩 매칭해보세요.(7글자)",
+        answer: "LIBRARY"
     },
     {
         id: 4,
         floor: "4단계",
-        title: "과학의 신비와 발견 🔬",
-        desc: "4층 자연과학실의 <strong>'기초과학 서가'</strong> 코너를 찾으세요. 그곳에 숨겨진 <strong>과학 QR 코드</strong>를 찾아 스캔하세요.",
+        title: "자연 문제 🦋",
+        desc: "1층 어린이자료실의 <strong>'동화의 숲'</strong> 장소에 가보세요. 그곳에 숨겨진 <strong>QR 코드</strong>를 찾아 스캔하세요.",
         qrCode: "ROOM_SCI_404",
-        question: "<strong>[과학 수수께끼]</strong><br>식물이 햇빛, 이산화탄소, 물을 이용해 스스로 영양분을 만들고 산소를 배출하는 작용을 무엇이라고 할까요?",
-        hint: "식물이 자라는 데 꼭 필요한 빛 합성 작용입니다. 초성: ㄱㅎㅅ",
-        answer: "광합성"
+        question: "<strong>[자연 수수께끼]</strong><br>꽃이 많이 피어 있는 정원에서 꿀을 찾아 이 꽃 저 꽃을 날아다니는 곤충은 무엇일까요?",
+        hint: "힌트: 꽃의 꿀을 좋아하고, 알록달록한 날개를 가지고 하늘을 날아요.",
+        answer: "나비"
     },
     {
         id: 5,
         floor: "5단계",
-        title: "예술과 창작의 정원 🎨",
-        desc: "5층 예술실의 <strong>'미술/디자인 서가'</strong> 구역으로 이동하세요. 그곳에 숨겨진 <strong>예술 QR 코드</strong>를 찾아 스캔하세요.",
-        qrCode: "ROOM_ART_505",
-        question: "<strong>[미술 상식 퀴즈]</strong><br>대표작 '수련', '인상, 해돋이'를 그렸으며 빛의 변화를 캔버스에 담아냈던 프랑스의 대표적인 인상주의 화가는 누구일까요?",
-        hint: "성만 두 글자로 입력해 주세요. 초성: ㅁㄴ",
-        answer: "모네"
+        title: "국어 문제 ✍️",
+        desc: "1층 로비의 <strong>'전시코너'</strong> 구역으로 이동하세요. 그곳에 숨겨진 <strong>QR 코드</strong>를 찾아 스캔하세요.",
+        qrCode: "ROOM_LANG_505",
+        question: "<strong>[국어 수수께끼]</strong><br>음식을 차려 내거나 걸터앉거나 책을 올려놓고 볼 수 있게 만든 가구를 통틀어 이르는 말은 무엇일까요?",
+        hint: "힌트: 전시 중인 작품의 제목을 유심히 보세요",
+        answer: "상"
     },
     {
         id: 6,
         floor: "마지막 단계",
-        title: "지혜의 탈출구 🚪",
-        desc: "마지막 관문입니다! 도서관 <strong>'정문 출구(안내 데스크)'</strong> 근처로 이동하세요. 탈출문 근처에 부착된 <strong>탈출구 QR 코드</strong>를 스캔해 봉인을 푸세요.",
+        title: "지혜의 탈출구 🗝️",
+        desc: "마지막 관문입니다! 도서관 <strong>'1층 로비에 있는 안내 데스크'</strong> 근처로 이동하세요. 그곳에 있는 <strong>QR 코드</strong>를 스캔하세요.",
         qrCode: "ROOM_EXIT_999",
         question: "<strong>[마지막 수수께끼]</strong><br>'나는 입이 없어도 세상의 모든 지식을 말하고, 발이 없어도 역사와 미래를 여행하게 해주며, 마음의 양식을 쌓아준다. 내 표지를 펼치면 모험이 시작된다.' 이것은 무엇일까요?",
-        hint: "도서관에 소장되어 있는 종이 묶음입니다. 초성: ㅊ",
+        hint: "힌트: 도서관에 소장되어 있는 종이 묶음입니다.(1글자)",
         answer: "책"
     }
 ];
@@ -137,11 +137,11 @@ const Confetti = {
 
     animate() {
         if (!this.isActive) return;
-        
+
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
         let activeParticles = 0;
-        
+
         this.particles.forEach((p) => {
             p.y += p.speedY;
             p.x += p.speedX;
@@ -198,7 +198,7 @@ function checkUrlParams() {
 // --- Initialization and Core Functions ---
 function initApp() {
     Confetti.init();
-    
+
     // Check if the page was opened via a QR code link (has query params)
     const scannedCode = checkUrlParams();
 
@@ -213,11 +213,11 @@ function initApp() {
         state.currentMissionIndex = parseInt(savedProgress, 10);
         state.startTime = savedStartTime ? parseInt(savedStartTime, 10) : Date.now();
         state.secondsElapsed = savedSecs ? parseInt(savedSecs, 10) : 0;
-        
+
         if (state.currentMissionIndex < MISSIONS.length) {
             startTimer();
             showScreen("game-screen");
-            
+
             if (scannedCode) {
                 applyScannedCode(scannedCode);
             } else {
@@ -245,7 +245,7 @@ function showScreen(screenId) {
     if (activeScreen) {
         activeScreen.classList.add("active");
     }
-    
+
     if (screenId !== "complete-screen") {
         Confetti.stop();
     }
@@ -255,7 +255,7 @@ function showScreen(screenId) {
 function startAdventure() {
     const nickInput = document.getElementById("nickname-input");
     const name = nickInput.value.trim();
-    
+
     if (!name) {
         showFeedback("시작하려면 닉네임을 입력해 주세요!", "error", "welcome-msg");
         nickInput.parentElement.classList.add("shake");
@@ -330,7 +330,7 @@ function formatKoreanTime(totalSeconds) {
 // Apply code parsed from QR scan or manual entry
 function applyScannedCode(code) {
     if (state.currentMissionIndex >= MISSIONS.length) return;
-    
+
     const currentMission = MISSIONS[state.currentMissionIndex];
     if (code.toUpperCase() === currentMission.qrCode.toUpperCase()) {
         state.isUnlocked = true;
@@ -364,7 +364,7 @@ function renderGame() {
     }
 
     const mission = MISSIONS[state.currentMissionIndex];
-    
+
     // Update stats HUD
     document.getElementById("progress-text").textContent = `${state.currentMissionIndex + 1} / ${MISSIONS.length}`;
     const progressPercent = (state.currentMissionIndex / MISSIONS.length) * 100;
@@ -376,23 +376,23 @@ function renderGame() {
     // Update mission card content
     document.getElementById("mission-title").innerHTML = `<i class="fa-solid fa-map-location-dot"></i> ${mission.title}`;
     document.getElementById("mission-desc").innerHTML = mission.desc;
-    
+
     // Toggle game zones based on unlocked status
     const scanZone = document.getElementById("qr-scan-zone");
     const puzzleZone = document.getElementById("puzzle-zone");
-    
+
     if (state.isUnlocked) {
         scanZone.style.display = "none";
         puzzleZone.style.display = "flex";
-        
+
         // Setup puzzle question
         document.getElementById("puzzle-question").innerHTML = mission.question;
-        
+
         // Setup hint
         const hintTrigger = document.getElementById("hint-trigger-btn");
         const hintBox = document.getElementById("hint-box");
         const hintText = document.getElementById("hint-text");
-        
+
         hintBox.classList.remove("open");
         if (mission.hint && mission.hint.trim() !== "") {
             hintTrigger.style.display = "flex";
@@ -400,14 +400,14 @@ function renderGame() {
         } else {
             hintTrigger.style.display = "none";
         }
-        
+
         // Clear input and focus
         document.getElementById("answer-input").value = "";
         document.getElementById("answer-input").focus();
     } else {
         scanZone.style.display = "flex";
         puzzleZone.style.display = "none";
-        
+
         // Reset manual input panel
         document.getElementById("manual-input-box").classList.remove("open");
         document.getElementById("manual-qr-input").value = "";
@@ -465,7 +465,7 @@ function renderFloorIndicator(currentFloor) {
 function checkAnswer() {
     const inputField = document.getElementById("answer-input");
     const userInput = inputField.value.trim();
-    
+
     if (!userInput) {
         showFeedback("정답을 입력해 주세요!", "error", "game-feedback");
         shakeElement(inputField.parentElement);
@@ -482,14 +482,14 @@ function checkAnswer() {
     if (isCorrect) {
         showFeedback("정답입니다! 다음 방으로 나아갑니다 👏", "success", "game-feedback");
         triggerVibrate("success");
-        
+
         // Wait 1.2s then proceed
         setTimeout(() => {
             state.currentMissionIndex++;
             state.isUnlocked = false; // Lock next stage
             localStorage.setItem("library_adventure_progress", state.currentMissionIndex);
             localStorage.setItem("library_escape_unlocked", "false");
-            
+
             // Clear any general scan feedback
             const scanFeedback = document.getElementById("scan-feedback");
             if (scanFeedback) {
@@ -519,8 +519,8 @@ function finishGame() {
 function generateCertificate() {
     const dateObj = new Date();
     const dateStr = dateObj.toLocaleDateString("ko-KR", { year: 'numeric', month: 'long', day: 'numeric' });
-    
-    const simpleHash = Math.abs(state.nickname.split("").reduce((a,b)=>{a=((a<<5)-a)+b.charCodeAt(0);return a&a},0)).toString(36).slice(0, 4).toUpperCase();
+
+    const simpleHash = Math.abs(state.nickname.split("").reduce((a, b) => { a = ((a << 5) - a) + b.charCodeAt(0); return a & a }, 0)).toString(36).slice(0, 4).toUpperCase();
     const timeHash = (state.startTime % 10000).toString(36).toUpperCase();
     state.certId = `LMA-${simpleHash}-${timeHash}`;
 
@@ -544,20 +544,20 @@ function resetGameData() {
     localStorage.removeItem("library_adventure_starttime");
     localStorage.removeItem("library_adventure_secs");
     localStorage.removeItem("library_escape_unlocked");
-    
+
     state.nickname = "";
     state.currentMissionIndex = 0;
     state.secondsElapsed = 0;
     state.startTime = null;
     state.isUnlocked = false;
     state.pendingScanCode = null;
-    
+
     const scanFeedback = document.getElementById("scan-feedback");
     if (scanFeedback) {
         scanFeedback.className = "feedback-msg";
         scanFeedback.textContent = "";
     }
-    
+
     showScreen("welcome-screen");
     document.getElementById("nickname-input").value = "";
 }
@@ -573,14 +573,14 @@ function openScanner() {
     msg.className = "scanner-msg";
 
     navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
-        .then(function(stream) {
+        .then(function (stream) {
             state.scannerStream = stream;
             video.srcObject = stream;
             video.setAttribute("playsinline", true);
             video.play();
             requestAnimationFrame(tickScanner);
         })
-        .catch(function(err) {
+        .catch(function (err) {
             console.error("Camera access error:", err);
             msg.textContent = "카메라에 접근할 수 없습니다. 권한을 확인하거나 수동 코드를 사용하세요.";
             msg.className = "scanner-msg error";
@@ -612,13 +612,13 @@ function tickScanner() {
 
     if (video && video.readyState === video.HAVE_ENOUGH_DATA) {
         msg.textContent = "QR 코드를 스캔하는 중...";
-        
+
         const canvas = document.createElement("canvas");
         canvas.width = video.videoWidth;
         canvas.height = video.videoHeight;
         const ctx = canvas.getContext("2d");
         ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-        
+
         const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
         const code = jsQR(imageData.data, imageData.width, imageData.height, {
             inversionAttempts: "dontInvert",
@@ -627,7 +627,7 @@ function tickScanner() {
         if (code) {
             let scannedVal = code.data.trim();
             console.log("Scanned QR Value:", scannedVal);
-            
+
             try {
                 if (scannedVal.startsWith("http://") || scannedVal.startsWith("https://")) {
                     const url = new URL(scannedVal);
@@ -651,7 +651,7 @@ function tickScanner() {
             }
         }
     }
-    
+
     if (state.scannerStream) {
         requestAnimationFrame(tickScanner);
     }
@@ -670,7 +670,7 @@ function toggleManualCode() {
 function submitManualCode() {
     const input = document.getElementById("manual-qr-input");
     const code = input.value.trim();
-    
+
     if (!code) {
         showFeedback("코드를 입력해 주세요!", "error", "scan-feedback");
         shakeElement(input.parentElement);
@@ -705,7 +705,7 @@ document.addEventListener("keydown", (e) => {
         if (activeScreen && activeScreen.id === "game-screen") {
             const answerInput = document.getElementById("answer-input");
             const manualInput = document.getElementById("manual-qr-input");
-            
+
             if (document.activeElement === answerInput) {
                 checkAnswer();
             } else if (document.activeElement === manualInput) {
