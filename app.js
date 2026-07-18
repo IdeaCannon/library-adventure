@@ -37,6 +37,26 @@ const MISSIONS = [
     },
     {
         id: 4,
+        floor: "4단계",
+        title: "과학의 신비와 발견 🔬",
+        desc: "4층 자연과학실의 <strong>'기초과학 서가'</strong> 코너를 찾으세요. 그곳에 숨겨진 <strong>과학 QR 코드</strong>를 찾아 스캔하세요.",
+        qrCode: "ROOM_SCI_404",
+        question: "<strong>[과학 수수께끼]</strong><br>식물이 햇빛, 이산화탄소, 물을 이용해 스스로 영양분을 만들고 산소를 배출하는 작용을 무엇이라고 할까요?",
+        hint: "식물이 자라는 데 꼭 필요한 빛 합성 작용입니다. 초성: ㄱㅎㅅ",
+        answer: "광합성"
+    },
+    {
+        id: 5,
+        floor: "5단계",
+        title: "예술과 창작의 정원 🎨",
+        desc: "5층 예술실의 <strong>'미술/디자인 서가'</strong> 구역으로 이동하세요. 그곳에 숨겨진 <strong>예술 QR 코드</strong>를 찾아 스캔하세요.",
+        qrCode: "ROOM_ART_505",
+        question: "<strong>[미술 상식 퀴즈]</strong><br>대표작 '수련', '인상, 해돋이'를 그렸으며 빛의 변화를 캔버스에 담아냈던 프랑스의 대표적인 인상주의 화가는 누구일까요?",
+        hint: "성만 두 글자로 입력해 주세요. 초성: ㅁㄴ",
+        answer: "모네"
+    },
+    {
+        id: 6,
         floor: "마지막 단계",
         title: "지혜의 탈출구 🚪",
         desc: "마지막 관문입니다! 도서관 <strong>'정문 출구(안내 데스크)'</strong> 근처로 이동하세요. 탈출문 근처에 부착된 <strong>탈출구 QR 코드</strong>를 스캔해 봉인을 푸세요.",
@@ -148,59 +168,7 @@ const Confetti = {
     }
 };
 
-// --- Web Audio sound effects synthesizer ---
-function playAudio(type) {
-    try {
-        const AudioContext = window.AudioContext || window.webkitAudioContext;
-        if (!AudioContext) return;
-        const ctx = new AudioContext();
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-        osc.connect(gain);
-        gain.connect(ctx.destination);
 
-        const now = ctx.currentTime;
-        if (type === "success") {
-            osc.type = "sine";
-            osc.frequency.setValueAtTime(523.25, now); // C5
-            osc.frequency.setValueAtTime(783.99, now + 0.1); // G5
-            gain.gain.setValueAtTime(0.1, now);
-            gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
-            osc.start(now);
-            osc.stop(now + 0.3);
-        } else if (type === "unlock") {
-            osc.type = "triangle";
-            osc.frequency.setValueAtTime(261.63, now); // C4
-            osc.frequency.setValueAtTime(329.63, now + 0.08); // E4
-            osc.frequency.setValueAtTime(392.00, now + 0.16); // G4
-            osc.frequency.setValueAtTime(523.25, now + 0.24); // C5
-            gain.gain.setValueAtTime(0.15, now);
-            gain.gain.exponentialRampToValueAtTime(0.01, now + 0.45);
-            osc.start(now);
-            osc.stop(now + 0.45);
-        } else if (type === "error") {
-            osc.type = "sawtooth";
-            osc.frequency.setValueAtTime(120, now);
-            osc.frequency.exponentialRampToValueAtTime(80, now + 0.25);
-            gain.gain.setValueAtTime(0.1, now);
-            gain.gain.exponentialRampToValueAtTime(0.01, now + 0.25);
-            osc.start(now);
-            osc.stop(now + 0.25);
-        } else if (type === "fanfare") {
-            osc.type = "sine";
-            osc.frequency.setValueAtTime(523.25, now); // C5
-            osc.frequency.setValueAtTime(659.25, now + 0.1); // E5
-            osc.frequency.setValueAtTime(783.99, now + 0.2); // G5
-            osc.frequency.setValueAtTime(1046.50, now + 0.3); // C6
-            gain.gain.setValueAtTime(0.15, now);
-            gain.gain.exponentialRampToValueAtTime(0.01, now + 0.6);
-            osc.start(now);
-            osc.stop(now + 0.6);
-        }
-    } catch (e) {
-        console.error("Web Audio API is blocked or not supported:", e);
-    }
-}
 
 // --- Haptic Feedback ---
 function triggerVibrate(type) {
@@ -292,7 +260,6 @@ function startAdventure() {
         showFeedback("시작하려면 닉네임을 입력해 주세요!", "error", "welcome-msg");
         nickInput.parentElement.classList.add("shake");
         setTimeout(() => nickInput.parentElement.classList.remove("shake"), 400);
-        playAudio("error");
         triggerVibrate("error");
         return;
     }
@@ -318,7 +285,6 @@ function startAdventure() {
     localStorage.setItem("library_adventure_secs", "0");
     localStorage.setItem("library_escape_unlocked", state.isUnlocked ? "true" : "false");
 
-    playAudio("unlock");
     startTimer();
     showScreen("game-screen");
     renderGame();
@@ -369,7 +335,6 @@ function applyScannedCode(code) {
     if (code.toUpperCase() === currentMission.qrCode.toUpperCase()) {
         state.isUnlocked = true;
         localStorage.setItem("library_escape_unlocked", "true");
-        playAudio("unlock");
         triggerVibrate("unlock");
         showFeedback("성공! 비밀 수수께끼가 잠금 해제되었습니다.", "success", "scan-feedback");
         renderGame();
@@ -386,7 +351,6 @@ function applyScannedCode(code) {
         } else {
             showFeedback("올바른 도서관 미션 QR 코드가 아닙니다.", "error", "scan-feedback");
         }
-        playAudio("error");
         triggerVibrate("error");
         renderGame();
     }
@@ -505,7 +469,6 @@ function checkAnswer() {
     if (!userInput) {
         showFeedback("정답을 입력해 주세요!", "error", "game-feedback");
         shakeElement(inputField.parentElement);
-        playAudio("error");
         triggerVibrate("error");
         return;
     }
@@ -518,7 +481,6 @@ function checkAnswer() {
 
     if (isCorrect) {
         showFeedback("정답입니다! 다음 방으로 나아갑니다 👏", "success", "game-feedback");
-        playAudio("success");
         triggerVibrate("success");
         
         // Wait 1.2s then proceed
@@ -540,7 +502,6 @@ function checkAnswer() {
     } else {
         showFeedback("틀렸습니다. 단서를 다시 해석해 보세요! 🔍", "error", "game-feedback");
         shakeElement(inputField.parentElement);
-        playAudio("error");
         triggerVibrate("error");
     }
 }
@@ -552,7 +513,6 @@ function finishGame() {
     generateCertificate();
     showScreen("complete-screen");
     Confetti.start();
-    playAudio("fanfare");
     triggerVibrate("unlock");
 }
 
@@ -714,7 +674,6 @@ function submitManualCode() {
     if (!code) {
         showFeedback("코드를 입력해 주세요!", "error", "scan-feedback");
         shakeElement(input.parentElement);
-        playAudio("error");
         triggerVibrate("error");
         return;
     }
